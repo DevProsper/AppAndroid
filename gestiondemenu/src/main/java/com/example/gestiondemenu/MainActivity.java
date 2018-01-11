@@ -139,6 +139,5 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         //evenementArrayList.remove(evenement);
         //adapter.notifyDataSetChanged();
         //adapter.notifyItemRemoved(positionElement);
-
     }
 }
