@@ -1,1 +1,1 @@
-include ':app', ':jeud_android', ':gestiondemenu', ':broadcastreceiver', ':service'
+include ':app', ':jeud_android', ':gestiondemenu', ':broadcastreceiver', ':service', ':serviceandlibrairieotto'
