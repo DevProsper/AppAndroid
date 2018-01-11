@@ -8,6 +8,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.broadcastreceiver.MainActivity">
 
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif-monospace"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:text="Activé le mode avion du téléphone" />
 </RelativeLayout>

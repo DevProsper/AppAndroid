@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/broadcastreceiver/broadcastreceiver.iml" filepath="$PROJECT_DIR$/broadcastreceiver/broadcastreceiver.iml" />
       <module fileurl="file://$PROJECT_DIR$/gestiondemenu/gestiondemenu.iml" filepath="$PROJECT_DIR$/gestiondemenu/gestiondemenu.iml" />
       <module fileurl="file://$PROJECT_DIR$/jeud_android/jeud_android.iml" filepath="$PROJECT_DIR$/jeud_android/jeud_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service/service.iml" filepath="$PROJECT_DIR$/service/service.iml" />
     </modules>
   </component>
 </project>

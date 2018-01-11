@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/broadcastreceiver" />
             <option value="$PROJECT_DIR$/gestiondemenu" />
             <option value="$PROJECT_DIR$/jeud_android" />
+            <option value="$PROJECT_DIR$/service" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
