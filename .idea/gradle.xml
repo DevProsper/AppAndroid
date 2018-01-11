@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/broadcastreceiver" />
             <option value="$PROJECT_DIR$/gestiondemenu" />
             <option value="$PROJECT_DIR$/jeud_android" />
           </set>

@@ -1,1 +1,1 @@
-include ':app', ':jeud_android', ':gestiondemenu'
+include ':app', ':jeud_android', ':gestiondemenu', ':broadcastreceiver'

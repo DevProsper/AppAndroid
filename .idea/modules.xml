@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FormationAndroid3.iml" filepath="$PROJECT_DIR$/FormationAndroid3.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/broadcastreceiver/broadcastreceiver.iml" filepath="$PROJECT_DIR$/broadcastreceiver/broadcastreceiver.iml" />
       <module fileurl="file://$PROJECT_DIR$/gestiondemenu/gestiondemenu.iml" filepath="$PROJECT_DIR$/gestiondemenu/gestiondemenu.iml" />
       <module fileurl="file://$PROJECT_DIR$/jeud_android/jeud_android.iml" filepath="$PROJECT_DIR$/jeud_android/jeud_android.iml" />
     </modules>
