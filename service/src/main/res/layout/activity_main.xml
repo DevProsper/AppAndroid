@@ -15,12 +15,18 @@
         android:layout_height="wrap_content"
         android:text="DEMARRER UN SERVICE" />
     <Button
+        android:id="@+id/cont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CONNEXION AU SERVICE" />
+    <Button
         android:id="@+id/stop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="DEMARRER UN SERVICE" />
-    <Button
+    <TextView
         android:id="@+id/tv"
+        android:text="Du Texte"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
