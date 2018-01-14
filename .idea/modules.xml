@@ -11,6 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/notification/notification.iml" filepath="$PROJECT_DIR$/notification/notification.iml" />
       <module fileurl="file://$PROJECT_DIR$/service/service.iml" filepath="$PROJECT_DIR$/service/service.iml" />
       <module fileurl="file://$PROJECT_DIR$/serviceandlibrairieotto/serviceandlibrairieotto.iml" filepath="$PROJECT_DIR$/serviceandlibrairieotto/serviceandlibrairieotto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sharedpreferences/sharedpreferences.iml" filepath="$PROJECT_DIR$/sharedpreferences/sharedpreferences.iml" />
     </modules>
   </component>
 </project>
