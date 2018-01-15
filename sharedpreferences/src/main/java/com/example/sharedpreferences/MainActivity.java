@@ -40,9 +40,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "char Nom", Toast.LENGTH_SHORT).show();
             nom.setText(SharedPreferencesUtils.recupererNom(this));
         }else if (view == sau_personne){
+            Personne personne = new Personne(nom.getText().toString(), prenom.getText().toString());
+            SharedPreferencesUtils.sauvegarderPersonne(this, personne);
             Toast.makeText(this, "Sauv pers", Toast.LENGTH_SHORT).show();
         }else if (view == charger_personne){
-            Toast.makeText(this, "charg pers", Toast.LENGTH_SHORT).show();
+            Personne personne = SharedPreferencesUtils.recupererPersonne(this);
+            if (personne != null){
+                nom.setText(personne.getNom());
+                prenom.setText(personne.getPrenom());
+                Toast.makeText(this, "charg pers", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(this, "Aucune charg pers", Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 }
