@@ -1,1 +1,1 @@
-include ':app', ':jeud_android', ':gestiondemenu', ':broadcastreceiver', ':service', ':serviceandlibrairieotto', ':notification', ':localisation', ':sharedpreferences'
+include ':app', ':jeud_android', ':gestiondemenu', ':broadcastreceiver', ':service', ':serviceandlibrairieotto', ':notification', ':localisation', ':sharedpreferences', ':recyclerviewexpandable'
