@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Accueil" />
+        <item
+            android:id="@+id/nav_create"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Création de la carte" />
+        <item
+            android:id="@+id/nav_style"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Stylisation" />
+        <item
+            android:id="@+id/nav_inter"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Interagiraction" />
+
+        <item
+            android:id="@+id/nav_draw"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Dessiner" />
+
+        <item
+            android:id="@+id/nav_libr"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Biblioteque" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send" />
+        </menu>
+    </item>
+
+</menu>
