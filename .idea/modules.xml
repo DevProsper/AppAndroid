@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/broadcastreceiver/broadcastreceiver.iml" filepath="$PROJECT_DIR$/broadcastreceiver/broadcastreceiver.iml" />
       <module fileurl="file://$PROJECT_DIR$/gestiondemenu/gestiondemenu.iml" filepath="$PROJECT_DIR$/gestiondemenu/gestiondemenu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/googlemaps/googlemaps.iml" filepath="$PROJECT_DIR$/googlemaps/googlemaps.iml" />
       <module fileurl="file://$PROJECT_DIR$/jeud_android/jeud_android.iml" filepath="$PROJECT_DIR$/jeud_android/jeud_android.iml" />
       <module fileurl="file://$PROJECT_DIR$/localisation/localisation.iml" filepath="$PROJECT_DIR$/localisation/localisation.iml" />
       <module fileurl="file://$PROJECT_DIR$/notification/notification.iml" filepath="$PROJECT_DIR$/notification/notification.iml" />
