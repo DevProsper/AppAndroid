@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -21,9 +22,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsFragment extends Fragment {
+public class MapsFragment extends Fragment implements
+        GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener, GoogleMap.OnCameraIdleListener, OnMapReadyCallback{
 
     private View view;
+    private TextView mTapTextView;
+    private TextView mCameraTextView;
+    private GoogleMap mMap;
 
     MapView mMapView;
     private GoogleMap googleMap;
@@ -37,6 +42,9 @@ public class MapsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         view = inflater.inflate(R.layout.fragment_maps, container, false);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
+        mTapTextView = (TextView)view.findViewById(R.id.tap_text);
+        mCameraTextView = (TextView)view.findViewById(R.id.camera_text);
 
         mMapView = (MapView) view.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
@@ -67,7 +75,10 @@ public class MapsFragment extends Fragment {
 
                 // For dropping a marker at a point on the Map
                 LatLng sydney = new LatLng(-34, 151);
-                googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
+                googleMap.addMarker(new MarkerOptions()
+                        .position(sydney)
+                        .title("Marker Title")
+                        .snippet("Marker Description"));
 
                 // For zooming automatically to the location of the marker
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
@@ -104,4 +115,26 @@ public class MapsFragment extends Fragment {
         mMapView.onLowMemory();
     }
 
+    @Override
+    public void onCameraIdle() {
+        mCameraTextView.setText(mMap.getCameraPosition().toString());
+    }
+
+    @Override
+    public void onMapClick(LatLng point) {
+        mTapTextView.setText("tapped, point=" + point);
+    }
+
+    @Override
+    public void onMapLongClick(LatLng point) {
+        mTapTextView.setText("long pressed, point=" + point);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap map) {
+        mMap = map;
+        mMap.setOnMapClickListener(this);
+        mMap.setOnMapLongClickListener(this);
+        mMap.setOnCameraIdleListener(this);
+    }
 }
