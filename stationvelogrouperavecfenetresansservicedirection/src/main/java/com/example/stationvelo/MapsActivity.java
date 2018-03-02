@@ -1,9 +1,5 @@
 package com.example.stationvelo;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -32,8 +28,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private ArrayList<Station> stations;
     private Station stationClick;
 
-    private static final int LOCATION_REQ_CODE = 456;
-
     private ClusterManager<Station> mClusterManager;
 
     @Override
@@ -48,25 +42,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         stationClick = null;
 
-        //Demande de permission de la localisation
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},LOCATION_REQ_CODE);
-        }
-
        new GetStationAT(this).execute();
     }
 
-    //Retour de la demande à la permission
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        //Si j'ai la persmission et si ma Map n'a pas bien été charger dans le cas contraire, on charge la localisation
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            if (mMap != null){
-                mMap.setMyLocationEnabled(true);
-            }
-        }
-    }
 
     /**
      * Manipulates the map once available.
@@ -97,11 +75,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerClickListener(mClusterManager);//Clic sur le markeur
 
         mMap.setInfoWindowAdapter(mClusterManager.getMarkerManager());
-
-        //Si on a la permission, on affiche la position sur la carte
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-                mMap.setMyLocationEnabled(true);
-        }
 
         rafraichirCarte();
     }
