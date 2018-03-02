@@ -43,8 +43,6 @@ public class MapsFragment extends Fragment implements
         view = inflater.inflate(R.layout.fragment_maps, container, false);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
 
-        mTapTextView = (TextView)view.findViewById(R.id.tap_text);
-        mCameraTextView = (TextView)view.findViewById(R.id.camera_text);
 
         mMapView = (MapView) view.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
