@@ -13,7 +13,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.maps.android.clustering.ClusterManager;
 
 import java.util.ArrayList;
 
@@ -21,8 +20,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private ArrayList<Station> stations;
-
-    private ClusterManager<Station> mClusterManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +29,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        stations = new ArrayList<>();
+        stations = new ArrayList<Station>();
        new GetStationAT(this).execute();
     }
 
@@ -55,11 +52,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
-        mClusterManager = new ClusterManager<>(this, mMap);
-
-        mMap.setOnCameraIdleListener(mClusterManager);//Permet d'être au courant au moment ou le mouvement de camera se termine
-        mMap.setOnMarkerClickListener(mClusterManager);//Clic sur le markeur
-
         rafraichirCarte();
     }
 
@@ -71,15 +63,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if (!stations.isEmpty()){
 
-            mClusterManager.clearItems();
-            mClusterManager.addItems(stations);
-
             //Afficher ou centrer une carte après l'animation
             LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
             for (Station station : stations){
+                final MarkerOptions marker = new MarkerOptions();
+                LatLng latLng = new LatLng(station.getPosition().getLat(), station.getPosition().getLng());
 
-                builder.include(station.getPosition());
+                builder.include(latLng);
+
+                marker.position(latLng);
+                marker.title(station.getName());
+
+                mMap.addMarker(marker).setTag(station);
             }
 
             int padding = 100;

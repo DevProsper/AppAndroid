@@ -1,13 +1,10 @@
 package com.example.stationvelo.model.beans;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.google.maps.android.clustering.ClusterItem;
-
 /**
  * Created by DevProsper on 02/03/2018.
  */
 
-public class Station implements ClusterItem{
+public class Station {
 
     private Integer number;
     private String name;
@@ -21,14 +18,6 @@ public class Station implements ClusterItem{
     private Integer available_bike_stands;
     private Integer available_bikes;
     private Long last_update;
-
-    @Override
-    public LatLng getPosition() {
-        if (position == null){
-            return null;
-        }
-        return new LatLng(position.getLat(), position.getLng());
-    }
 
     public Integer getNumber() {
         return number;
@@ -54,7 +43,7 @@ public class Station implements ClusterItem{
         this.address = address;
     }
 
-    public Position geObjetctPosition() {
+    public Position getPosition() {
         return position;
     }
 
@@ -125,6 +114,4 @@ public class Station implements ClusterItem{
     public void setLast_update(Long last_update) {
         this.last_update = last_update;
     }
-
-
 }
