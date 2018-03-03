@@ -3,6 +3,8 @@ package com.example.stationvelo.model.webservice;
 import android.util.Log;
 
 import com.example.stationvelo.model.beans.Station;
+import com.example.stationvelo.model.beans.direction.DirectionResult;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -39,6 +41,23 @@ public class WSUtils {
             }.getType());
             inputStreamReader.close();
             return stations;
+        }
+    }
+
+    private static final String URL_WS_GOOGLE_JSON = "https://maps.googleapis.com/maps/api/directions/json?mode=walking";
+
+    public static DirectionResult getDirection(LatLng depart, LatLng arrive) throws Exception {
+        String url = URL_WS_GOOGLE_JSON + "&origin=" + depart.longitude+ "," +depart.latitude+ "&destination=" + arrive.longitude+ "," + arrive.latitude;
+        Response response = OkHttpUtils.sendGetOkHttpRequest(url);
+
+        //Analyse du code de retour
+        if (response.code() != HttpURLConnection.HTTP_OK){
+            throw new Exception("Réponse du serveur incorecte : " +response.code());
+        }else{
+            InputStreamReader inputStreamReader = new InputStreamReader(response.body().byteStream());
+            DirectionResult directionResult = gson.fromJson(inputStreamReader, DirectionResult.class);
+            inputStreamReader.close();
+            return directionResult;
         }
     }
 }

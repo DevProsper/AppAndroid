@@ -1,7 +1,11 @@
 package com.example.stationvelo;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -12,6 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.stationvelo.model.beans.Station;
+import com.example.stationvelo.model.beans.direction.DirectionResult;
+import com.example.stationvelo.model.beans.trajet.Trajet;
+import com.example.stationvelo.model.webservice.GetDirectionAT;
 import com.example.stationvelo.model.webservice.GetStationAT;
 import com.example.stationvelo.vue.ClusterIconRenderer;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -22,15 +29,21 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterManager;
 
 import java.util.ArrayList;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GetStationAT.GetStationATResult, ClusterManager.OnClusterItemClickListener<Station>, GoogleMap.InfoWindowAdapter {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
+        GetStationAT.GetStationATResult,
+        ClusterManager.OnClusterItemClickListener<Station>,
+        GoogleMap.InfoWindowAdapter,
+        ClusterManager.OnClusterItemInfoWindowClickListener<Station>,GetDirectionAT.GetDirectionATResult {
 
     private GoogleMap mMap;
     private ArrayList<Station> stations;
     private Station stationClick;
+    private Trajet trajet;
 
     private static final int LOCATION_REQ_CODE = 456;
 
@@ -47,6 +60,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         stations = new ArrayList<>();
 
         stationClick = null;
+        trajet = null;
 
         //Demande de permission de la localisation
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
@@ -106,6 +120,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         rafraichirCarte();
     }
 
+
+
     public void rafraichirCarte(){
         if (mMap == null){
             return;
@@ -125,10 +141,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 builder.include(station.getPosition());
             }
 
-            int padding = 100;
-            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(
-                    builder.build(), padding
-            ));
+            if (trajet == null){
+
+                int padding = 100;
+                mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(
+                        builder.build(), padding
+                ));
+            }else{
+                //On affiche le trajet
+                mMap.addMarker(trajet.getDepart());
+                mMap.addPolyline(trajet.getPolylineOptions());
+                mMap.addMarker(trajet.getArrive());
+
+                int padding = 100;
+                mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(
+                        builder.build(), padding
+                ));
+            }
+
         }
     }
 
@@ -178,5 +208,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         tv_velo_vide.setText(stationClick.getAvailable_bike_stands() + "");
 
         return view;
+    }
+
+    //Click sur la fenêtre d'un markeur
+    @Override
+    public void onClusterItemInfoWindowClick(Station station) {
+
+        if (mMap.isMyLocationEnabled()){
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+
+                LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+                Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(new Criteria(), true));
+                new GetDirectionAT(new LatLng(location.getLatitude(), location.getLongitude()), station.getPosition(), this).execute();
+            }
+        }else{
+            Toast.makeText(this, "Veuillez activer votre location", Toast.LENGTH_SHORT);
+        }
+    }
+
+    @Override
+    public void directionChargees(DirectionResult directionResult) {
+        try {
+            trajet = new Trajet(directionResult);
+            rafraichirCarte();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void GetDirectionATResultErreur(Exception e) {
+        e.printStackTrace();
+        Toast.makeText(MapsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
     }
 }
